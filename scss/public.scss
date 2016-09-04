@@ -21,6 +21,10 @@
 
 
 
+
+.icon-menu:before {
+  content: "\e904";
+}
 .icon-mapmarker:before {
   content: "\e900";
 }
@@ -36,7 +40,6 @@
 .icon-phone:before {
   content: "\e942";
 }
-
 
 
 * {
@@ -90,6 +93,7 @@ $mainColor: rgba(252, 208, 45, 1.00);
   background-color: rgba(32, 33, 33, 1.00);
   padding-top: 10px;
   border-bottom: 10px solid $mainColor;
+  z-index: 99;
   
   + * {
     margin-top: $mainHeaderHeight;
@@ -174,10 +178,76 @@ $mainColor: rgba(252, 208, 45, 1.00);
   }
 
   @media screen and (min-width: 0px) and (max-width: #{$mediaTabletWidth - 1px}) {
-    border: 1px solid rgba(255, 0, 0, .3);
+    .container {
+      .left {
+        text-align: left;
+        width: 60px;
+
+        > a {
+          margin-top: 6px;
+          color: $mainColor;
+          text-decoration: none;
+          font-size: 55px;
+          cursor: pointer;
+        }
+        img {
+          display: none;
+        }
+      }
+      .right {
+        width: calc(100% - 60px);
+
+        > div {
+          width: 250px;
+          @include border-radius(10px);
+        }
+        .product {
+          display: none;
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 0px) and (max-width: #{640px - 1px}) {
+    .container {
+      .left {
+        margin-top: 5px;
+        width: 45px;
+
+        > a {
+          font-size: 45px;
+        }
+      }
+      .right {
+        width: calc(100% - 45px);
+        > a {
+          font-size: 13px;
+          width: 70px;
+          margin-top: 10px;
+        }
+        > div {
+          padding-left: 5px;
+          width: 125px;
+          height: 35px;
+          @include border-radius(10px);
+
+          input {
+            margin-top: 2px;
+            font-size: 13px;
+            padding-right: 5px;
+          }
+          i {
+            top: 8px;
+            right: 5px;
+            width: 20px;
+          }
+        }
+      }
+    }
   }
   @media screen and (min-width: #{$mediaTabletWidth}) {
-    
+    .container .left > a {
+      display: none;
+    }
   }
   @media screen and (min-width: $mediaTabletWidth) and (max-width: #{$mainWidth - 1px}) {
     .container .right .product {      
@@ -250,6 +320,331 @@ $mainColor: rgba(252, 208, 45, 1.00);
       @for $j from 1 through 10 {
         .banner:nth-child(#{$j}) {
           left: calc(#{$j - $i} * 100%);
+        }
+      }
+    }
+  }
+}
+
+.main {
+  border: 1px solid rgba(255, 0, 0, .3);
+
+  .container {
+    @media screen and (min-width: #{$mediaTabletWidth}) {
+      @include split-left(290px, '#menu', '#panel');
+    }
+    > * {
+    }
+  }
+}
+
+#menu {
+  $height: 45px;
+  @media screen and (min-width: 0px) and (max-width: #{$mediaTabletWidth - 1px}) {
+    position: fixed;
+    left: 0;
+    top: 60px;
+    display: none;
+    width: 100%;
+    height: calc(100% - 60px);
+    z-index: 999;
+    background-color: rgba(243, 244, 246, 1.00);
+    padding: 20px;
+
+    &.show {
+      display: inline-block;
+    }
+
+    &:before, .close {
+      position: absolute;
+      top: -60px;
+      left: 0;
+      display: inline-block;
+      height: 60px;
+    }
+    .close {
+      width: 60px;
+      line-height: 60px;
+      background-color: rgba(243, 244, 246, 1.00);
+      cursor: pointer;
+      z-index: 2;
+    }
+    &:before {
+      content: '';
+      width: 100%;
+      background-color: rgba(39, 40, 34, .500);
+      z-index: 1;
+    }
+    @include clearfix();
+
+    .title {
+      float: left;
+      display: inline-block;
+      width: 100%;
+      height: $height;
+      line-height: $height;
+      text-align: left;
+      font-size: 25px;
+      color: rgba(39, 179, 215, 1.00);
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .groups {
+      + .title {
+        margin-top: 20px;
+      }
+    }
+    .group {
+      float: left;
+      display: inline-block;
+      width: calc(100% / 2 - 30px / 2);
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(212, 215, 215, 1.00);
+
+      &:nth-child(2n) {
+        margin-left: 30px;
+      }
+      &:nth-child(n + 3) {
+        margin-top: 10px;
+      }
+      a {
+        display: inline-block;
+        width: 100%;
+        color: rgba(113, 114, 115, 1.00);
+        text-align: left;
+        font-size: 20px;
+        text-decoration: none;
+        @include overflow-docx3();
+      }
+      > a {
+        font-weight: bold;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(212, 215, 215, 1.00);
+      }
+      > div {
+        padding: 0 20px;
+        padding-top: 10px;
+
+        a {
+          margin-top: 5px;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  @media screen and (min-width: #{$mediaTabletWidth}) {
+    border: 1px solid rgba(238, 239, 240, 1.00);
+    background-color: rgba(243, 244, 246, 1.00);
+    text-align: left;
+
+    .title, a {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      height: $height;
+      line-height: $height;
+      padding-left: 5px;
+      padding-right: 5px;
+      text-decoration: none;
+      color: rgba(132, 133, 134, 1.00);
+      cursor: pointer;
+      @include overflow-docx3();
+      @include transition(color .3s);
+
+      &:hover {
+        color: rgba(5, 207, 250, 1.00);
+      }
+      &.active {
+        color: rgba(5, 207, 250, 1.00);
+      }
+    }
+    .title {
+      font-weight: bold;
+      color: rgba(39, 179, 215, 1.00);
+      border-bottom: 1px solid rgba(252, 253, 253, 1.00);
+    }
+    .close {
+      display: none;
+    }
+    .group {
+      display: inline-block;
+      width: 100%;
+      height: $height;
+      line-height: $height;
+
+      > a {
+        padding-right: $height + 5px;
+        font-weight: bold;
+
+        &:after {
+          content: '▶';
+          position: absolute;
+          right: 0;
+          top: 0;
+          display: inline-block;
+          text-align: center;
+          width: $height;
+          height: $height;
+          line-height: $height;
+          font-size: 18px;
+          @include rotate(0);
+          @include transition(transform .3s);
+        }
+      }
+      > div {
+        display: none;
+        background-color: rgba(254, 255, 255, 1.00);
+        width: calc(100% - 10px * 2);
+        margin: 0 10px;
+        border-bottom: 1px solid rgba(209, 210, 211, 1.00);
+        @include border-radius(3px);
+        // @include box-shadow(0 1px 1px rgba(209, 210, 211, 1.00));
+      }
+
+      &.show {
+        height: auto;
+        
+        > a {
+          color: rgba(5, 207, 250, 1.00);
+
+          &:after {
+            @include rotate(90deg);
+          }
+        }
+        > div {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+#panel {
+  @media screen and (min-width: #{$mediaTabletWidth}) {
+    padding: 10px;
+  }
+
+  .infos {
+    display: inline-block;
+    width: 100%;
+    @media screen and (min-width: 0px) and (max-width: #{$mediaTabletWidth - 1px}) {
+      padding: 0 10px;
+    }
+    @media screen and (min-width: #{$mediaTabletWidth}) {
+      padding-left: 10px;
+    }
+    margin-bottom: 5px;
+
+    > * {
+      display: inline-block;
+      width: 100%;
+    }
+    nav {
+      $height: 35px;
+      height: $height;
+      @include clearfix();
+      
+      a {
+        float: left;
+        display: inline-block;
+        height: $height;
+        line-height: $height - 10px;
+        padding: 5px;
+        text-decoration: none;
+        color: rgba(121, 122, 123, 1.00);
+        
+        &:last-child, &:hover {
+          color: rgba(39, 179, 215, 1.00);
+        }
+        + a {
+          position: relative;
+          margin-left: 20px;
+
+          &:before {
+            content: '>';
+            position: absolute;
+            left: -20px;
+            top: 0;
+            display: inline-block;
+            width: 20px;
+            height: $height;
+            line-height: $height;
+            color: rgba(121, 122, 123, 1.00);
+          }
+        }
+      }
+    }
+
+    .img {
+      height: 235px;
+      margin-top: 5px;
+    }
+    .title {
+      margin-top: 10px;
+      border-top: 1px solid rgba(203, 204, 205, 1.00);
+      border-bottom: 1px solid rgba(203, 204, 205, 1.00);
+      color: rgba(39, 179, 215, 1.00);
+      padding-top: 13px;
+      padding-bottom: 15px;
+      text-align: left;
+      font-size: 20px;
+    }
+  }
+  .items {
+    display: inline-block;
+    width: 100%;
+    @include clearfix();
+    
+
+    .item {
+      float: left;
+      display: inline-block;
+
+      @media screen and (min-width: 0px) and (max-width: #{$mediaTabletWidth - 1px}) {
+        width: calc(100% / 2 - 10px * 2);
+      }
+      @media screen and (min-width: #{$mediaTabletWidth}) {
+        width: calc(100% / 3 - 10px * 2);
+      }
+
+      margin: 10px;
+
+      .img {
+        height: 200px;
+        border: 1px solid rgba(232, 233, 234, 1.00);
+      }
+      .info {
+        text-align: left;
+        margin: 10px 0;
+        border-left: 1px solid rgba(39, 180, 215, 1.00);
+
+        span {
+          display: inline-block;
+          width: 100%;
+          margin: 5px;
+          padding: 0 5px;
+          font-size: 18px;
+          font-weight: bold;
+          @include overflow-docx3();
+
+          + span {
+            margin-top: 0;
+          }
+        }
+      }
+      a {
+        display: inline-block;
+        width: 100%;
+        padding: 10px 5px;
+        background-color: rgba(203, 204, 205, 1.00);
+        color: rgba(255, 255, 255, 1.00);
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 20px;
+        @include transition(background-color .3s);
+
+        &:hover {
+          background-color: rgba(39, 180, 215, 1.00);
         }
       }
     }

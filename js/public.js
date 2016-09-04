@@ -23,5 +23,19 @@ $(function () {
     }, 7 * 1000);
   });
 
-  
+  var $menu = $('#menu');
+  $menu.find ('> div > a').click (function () {
+    var $that = $(this).parent ();
+    
+    if (!$that.hasClass ('show')) $that.addClass ('show').siblings ().removeClass ('show');
+    else $that.removeClass ('show');
+  });
+
+  $('#menu_button').click (function () {
+    $menu.toggleClass ('show');
+  });
+  $menu.find ('.close').click (function () {
+    $menu.toggleClass ('show');
+  });
+
 });
