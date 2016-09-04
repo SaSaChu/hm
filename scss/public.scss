@@ -654,8 +654,171 @@ $mainColor: rgba(252, 208, 45, 1.00);
       }
     }
   }
+  .pagination {
+    display: inline-block;
+    width: 100%;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(203, 204, 205, 1.00);
+
+    ul {
+      display: inline-block;
+      margin: 0 auto;
+      @include clearfix();
+      list-style: none;
+      padding: 0;
+      
+      li {
+        float: left;
+        display: inline-block;
+
+        &.active, &:hover {
+          a {
+            background-color: rgba(89, 162, 204, 1.00);
+          }
+        }
+        a {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          line-height: 30px;
+          margin: 5px;
+          font-size: 18px;
+          text-decoration: none;
+          background-color: rgba(196, 208, 217, 1.00);
+          // border: 1px solid rgba(255, 0, 0, .3);
+          color: rgba(255, 255, 255, 1.00);
+          @include border-radius(50%);
+          @include transition(background-color .3s);
+          
+
+          &.active, &:hover {
+            background-color: rgba(89, 162, 204, 1.00);
+          }
+        }
+      }
+    }
+  }
 }
 
 #footer {
   background-color: rgba(30, 31, 32, 1.00);
+  padding-bottom: 25px;
+
+  .container {
+    @include split-right(50%, '.left', '.right');
+    text-align: left;
+    @media screen and (min-width: 0) and (max-width: #{$mediaTabletWidth - 1px}) {
+      padding: 0 10px;
+      > * {
+        width: 100% !important;
+        padding: 0 !important;
+      }
+    }
+    @media screen and (min-width: $mediaTabletWidth) and (max-width: #{$mainWidth - 1px}) {
+      padding: 0 10px;
+    }
+
+    > * {
+      // border: 1px solid rgba(255, 0, 0, .3);
+    }
+    .title {
+      color: rgba(252, 208, 45, 1.00);
+      font-weight: bold;
+      margin: 0;
+      height: 65px;
+      line-height: 65px;
+      font-size: 20px;
+    }
+    .left {
+      padding-right: 35px;
+      @include clearfix();
+      
+      > * {
+        float: left;
+        display: inline-block;
+      }
+      .title {
+        width: 100%;
+      }
+      a {
+        position: relative;
+        color: rgba(255, 255, 255, 1.00);
+        text-decoration: none;
+        font-size: 16px;
+        padding: 5px 10px;
+        @include transition(color .3s);
+
+        &:hover {
+          color: rgba(252, 208, 45, 1.00);
+        }
+        &:after {
+          content: '';
+          position: absolute;
+          right: 0;
+          top: 7px;
+          display: inline-block;
+          width: 1px;
+          height: calc(100% - 7px * 2);
+          background-color: rgba(255, 255, 255, 1.00);
+        }
+      }
+    }
+    .right {
+      padding-left: 35px;
+      > div {
+        @include clearfix();
+        + div {
+          margin-top: 20px;
+
+          p {
+            color: rgba(252, 208, 45, 1.00);
+            font-weight: bold;
+            font-size: 18px;
+            width: 50%;
+            padding-left: 0;
+
+            a {
+              color: rgba(255, 255, 255, 1.00);
+              text-decoration: none;
+              margin-left: 5px;
+            }
+          }
+        }
+        p {
+          float: left;
+          display: inline-block;
+          width: 100%;
+          position: relative;
+          color: rgba(255, 255, 255, 1.00);
+          padding-left: 25px;
+          margin: 5px 0;
+
+          &:before {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: inline-block;
+            width: 20px;
+            text-align: center;
+            color: rgba(252, 208, 45, 1.00);
+          }
+        }
+        .icon-phone, .icon-printer {
+          width: auto;
+          margin-right: 15px;
+          max-width: calc(45% - 15px);
+          margin-top: 15px;
+        }
+        .icon-mail-envelope-closed {
+          margin-top: 15px;
+          a {
+            color: rgba(255, 255, 255, 1.00);
+            text-decoration: none;
+          }
+        }
+      }
+
+    }
+  }
 }

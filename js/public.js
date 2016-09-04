@@ -23,7 +23,8 @@ $(function () {
     }, 7 * 1000);
   });
 
-  var $menu = $('#menu');
+  var $menu = $('#menu'),
+      $panel = $('#panel');
   $menu.find ('> div > a').click (function () {
     var $that = $(this).parent ();
     
@@ -37,5 +38,11 @@ $(function () {
   $menu.find ('.close').click (function () {
     $menu.toggleClass ('show');
   });
+
+  $(window).resize (function () {
+    if ($(this).width () > 960) $menu.height ($panel.height () + parseFloat ($panel.css ('padding-top')) + parseFloat ($panel.css ('padding-bottom')));
+    else $menu.attr ('style');
+  }).resize ();
+  // 
 
 });
