@@ -826,21 +826,20 @@ $mainColor: rgba(252, 208, 45, 1.00);
 #about {
   padding: 10px;
   text-align: left;
-  
-  iframe {
-    width: 100%;
-    height: 450px;
-    margin-top: 20px;
+  @media screen and (min-width: 0) and (max-width: #{670px - 1px}) {
+  }
+  @media screen and (min-width: #{670px}) {
+    article {
+      > * {
+        display: inline-block;
+        float: left;
+        width: 50%;
+      }
+    }
   }
   article {
     @include clearfix();
     
-    > * {
-      display: inline-block;
-      float: left;
-      width: 50%;
-    }
-
     section:nth-child(1) {
       padding: 0 10px;
       header {
@@ -866,6 +865,11 @@ $mainColor: rgba(252, 208, 45, 1.00);
       }
     }
   }
+  iframe {
+    width: 100%;
+    height: 450px;
+    margin-top: 20px;
+  }
 }
 
 #detailed {
@@ -875,16 +879,28 @@ $mainColor: rgba(252, 208, 45, 1.00);
   }
   article:nth-child(1) {
     margin-bottom: 20px;
-    @include split-left(360px, '.img', 'section');
+    @media screen and (min-width: #{740px}) {
+      @include split-left(360px, '.img', 'section');
+    }
     
     .img {
       margin: 0;
       width: 360px;
       height: 360px;
       border: 1px solid rgba(203, 204, 205, .500);
+      @media screen and (min-width: 0) and (max-width: #{740px - 1px}) {
+        margin: 0 auto;
+        max-width: calc(100% - 10px * 2);
+      }
     }
     section {
-      padding-left: 20px;
+      @media screen and (min-width: 0) and (max-width: #{740px - 1px}) {
+        width: 100%;
+        padding: 10px;
+      }
+      @media screen and (min-width: #{740px}) {
+        padding-left: 20px;
+      }
       width: calc(100% - 360px);
 
       div {
