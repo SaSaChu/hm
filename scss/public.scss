@@ -6,18 +6,38 @@
 @import "_oa";
 
 @include font-face("Monaco", font-files("monaco/monaco.ttf", "monaco/monaco.otf"));
-// @include font-face("icomoon", font-files("icomoon/icomoon.eot", "icomoon/icomoon.woff", "icomoon/icomoon.ttf", "icomoon/icomoon.svg"));
-// [class^="icon-"], [class*=" icon-"] {
-//   font-family: 'icomoon', Monaco, "微軟正黑體", "Microsoft JhengHei";
-//   speak: none;
-//   font-style: normal;
-//   font-weight: normal;
-//   font-variant: normal;
-//   text-transform: none;
-//   line-height: 1;
+@include font-face("icomoon", font-files("icomoon/icomoon.eot", "icomoon/icomoon.woff", "icomoon/icomoon.ttf", "icomoon/icomoon.svg"));
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon', Monaco, "微軟正黑體", "Microsoft JhengHei";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 
-//   @include font-smoothing(antialiased);
-// }
+  @include font-smoothing(antialiased);
+}
+
+
+
+.icon-mapmarker:before {
+  content: "\e900";
+}
+.icon-search:before {
+  content: "\e901";
+}
+.icon-mail-envelope-closed:before {
+  content: "\e902";
+}
+.icon-printer:before {
+  content: "\e903";
+}
+.icon-phone:before {
+  content: "\e942";
+}
+
+
 
 * {
   &, &:after, &:before {
@@ -27,6 +47,9 @@
     @include font-smoothing(antialiased);
   }
 }
+
+
+$yellow: rgba(251, 213, 70, 1.00) ;
 
 html {
   height: 100%;
@@ -38,7 +61,7 @@ html {
     margin: 0;
     width: 100%;
     height: 100%;
-    font-size: medium;
+    // font-size: medium;
     font-family: "Roboto", "微軟正黑體", Monaco, "Microsoft JhengHei" ;
     background-color: rgba(255, 255, 255, 1.00);
     color: rgba(50, 50, 50, 0.8);
@@ -47,3 +70,327 @@ html {
 
   }
 }
+
+
+header {
+  width: 100%;
+
+  .tops {
+    width: 100%;
+    height: 95px;
+    background-color: rgba(33, 33, 33, 1.00);
+    border-bottom: 5px solid $yellow;
+
+    .topboxs {
+      width: 1000px;
+      margin: 0 auto;
+
+      @include split-left(30%, '.top_l', '.top_r');
+
+      .top_l {
+        padding-top: 15px;
+        height: 57px;
+
+        a {
+          border: 0;
+          img {
+            max-width: 100%;
+            height: auto;
+          }
+        }
+
+      }
+
+      .top_r {
+        display: inline-block;
+        padding-top: 30px;
+        height: 75px;
+
+        @include clearfix();
+
+        .menu {
+          display: inline-block;
+          float: right;
+          margin: 0;
+          padding: 0;
+          color: $yellow;
+          line-height: 35px;
+
+          a {
+            text-decoration: none;
+            color: $yellow;
+            font-size: 1em;
+            font-weight: bolder;
+
+            &:hover {
+              text-decoration: underline;
+              color: white;
+            }
+          }
+
+          &:after {
+            content: '│';
+            padding: 0 15px;
+          }
+
+          &:nth-child(2) {
+            &:after {
+              content: '';
+            }
+          }
+        }
+
+        .inputboxs {
+          display: inline-block;
+          float: right;
+          background-color: $yellow;
+          padding: 5px 15px;
+          @include border-radius(20px);
+
+          #inputype {
+            width: 200px;
+            border: 0;
+            outline: 0;
+            font-size: 1em;
+            color: black;
+            background: transparent;
+          }
+
+          button {
+            background: transparent;
+            border: 0;
+            outline: 0;
+            color: black;
+            cursor: pointer;
+            font-size: 1em;
+
+            &:hover {
+              color: rgba(0, 210, 250, 1.00);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .banners {
+    width: 100%;
+    height: 345px;
+  }
+
+}
+
+
+.middle {
+  width: 100%;
+
+  border: 1px solid rgba(255, 0, 0, .3);
+
+  .middleboxs {
+    width: 1000px;
+    margin: 0 auto;
+
+    @include split-left(30%, '.middle_l', '.middle_r');
+
+    .middle_l {
+      height: 500px;
+      background-color: rgba(0, 128, 0, 0.2);
+    }
+
+    .middle_r {
+      padding: 15px 0 15px 15px;
+
+      @include clearfix();
+
+      > div {
+        float: left;
+        width: calc(100% / 3 - 21px / 3);
+        height: 285px;
+        margin-bottom: 20px;
+
+        &:nth-child(3n + 2) {
+          margin: 0 10px;
+        }
+
+        .product_pic {}
+
+        .product_boxs {
+          .p_name {}
+          .p_type {}
+        }
+
+        .product_btn {}
+
+      }
+    }
+  }
+}
+
+
+
+
+
+footer {
+  width: 100%;
+
+  .ftops {
+    width: 100%;
+    padding: 25px 0;
+    background-color: rgba(34, 34, 34, 1.00);
+
+    .fboxs {
+      width: 1000px;
+      margin: 0 auto;
+
+      @include clearfix();
+
+      > div {
+        float: left;
+        width: 50%;
+
+        @include clearfix();
+        // 左邊的設定
+        .ftitle, .ftype {
+          margin: 0;
+          padding: 0;
+        }
+
+        .ftitle {
+          font-size: 1em;
+          text-align: left;
+          font-weight: bolder;
+          padding-bottom: 15px;
+          color: $yellow;
+        }
+
+        .ftype {
+          display: inline-block;
+          float: left;
+          font-size: .9em;
+          text-align: left;
+          color: white;
+          padding: 7px 0;
+
+          a {
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+              color: rgba(251, 213, 70, 1.00);
+            }
+          }
+
+          &:after {
+            content: '│';
+            padding: 0 5px;
+          }
+
+          &:last-child {
+              &:after {
+              content: '';
+            }
+          }
+        }
+
+        &:first-child {
+          padding-right: 30px;
+        }
+
+        // 右邊的設定
+        div {
+          display: inline-block;
+          width: 100%;
+
+          @include clearfix();
+
+          .icontype {
+            margin: 0;
+            padding-bottom: 15px;
+            display: inline-block;
+            float: left;
+            color: white;
+            font-size: .9em;
+
+            &:before {
+              padding-right: 5px;
+              color: $yellow;
+            }
+
+            &:nth-child(2) {
+              text-align: left;
+              padding-left: 19px;
+            }
+
+            &:nth-child(3) {
+              text-align: left;
+              padding-right: 20px;
+            }
+
+
+            a {
+              font-size: 1em;
+              color: white;
+              text-decoration: none;
+              cursor: pointer;
+              padding-left: 5px;
+
+              &:hover {
+                text-decoration: underline;
+                color: $yellow;
+              }
+            }
+
+          }
+
+          .idtitle {
+            display: inline-block;
+            float: left;
+            width: 50%;
+            text-align: left;
+            font-size: 1em;
+            color: $yellow;
+
+            a {
+              font-size: 1em;
+              color: white;
+              text-decoration: none;
+              cursor: pointer;
+              padding-left: 5px;
+
+              &:hover {
+                text-decoration: underline;
+                color: $yellow;
+              }
+            }
+          }
+
+        }
+
+
+
+
+
+      }
+    }
+
+  }
+
+  .fdowns {
+    width: 100%;
+
+    p {
+      display: inline-block;
+      padding: 15px 0;
+      margin: 0;
+      color: rgba(34, 34, 34, 1.00);
+      font-style: .8em;
+    }
+  }
+}
+
+
+
+
+

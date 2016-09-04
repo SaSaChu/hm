@@ -4,5 +4,6 @@
  */
 
 $(function () {
-
+  // 圖自動縮放
+   $('.banners').imgLiquid ({verticalAlign: 'center'});
 });
