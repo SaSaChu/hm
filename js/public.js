@@ -25,24 +25,20 @@ $(function () {
 
   var $menu = $('#menu'),
       $panel = $('#panel');
-  $menu.find ('> div > a').click (function () {
+
+  $menu.find ('.group > a').click (function () {
     var $that = $(this).parent ();
     
     if (!$that.hasClass ('show')) $that.addClass ('show').siblings ().removeClass ('show');
     else $that.removeClass ('show');
   });
 
-  $('#menu_button').click (function () {
-    $menu.toggleClass ('show');
-  });
-  $menu.find ('.close').click (function () {
-    $menu.toggleClass ('show');
-  });
+  $('#menu_button').click (function () { $menu.toggleClass ('show'); });
+  $menu.find ('.close').click (function () { $menu.toggleClass ('show'); });
 
   $(window).resize (function () {
     if ($(this).width () > 960) $menu.height ($panel.height () + parseFloat ($panel.css ('padding-top')) + parseFloat ($panel.css ('padding-bottom')));
     else $menu.attr ('style');
-  }).resize ();
-  // 
-
+  });
+  setTimeout (function () { $(window).resize (); });
 });
