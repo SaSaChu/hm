@@ -19,9 +19,12 @@
   @include font-smoothing(antialiased);
 }
 
-
-
-
+.icon-controller-play:before {
+  content: "\e905";
+}
+.icon-cross:before {
+  content: "\e906";
+}
 .icon-menu:before {
   content: "\e904";
 }
@@ -40,7 +43,6 @@
 .icon-phone:before {
   content: "\e942";
 }
-
 
 * {
   &, &:after, &:before {
@@ -327,8 +329,6 @@ $mainColor: rgba(252, 208, 45, 1.00);
 }
 
 .main {
-  border: 1px solid rgba(255, 0, 0, .3);
-
   .container {
     @media screen and (min-width: #{$mediaTabletWidth}) {
       @include split-left(290px, '#menu', '#panel');
@@ -364,6 +364,7 @@ $mainColor: rgba(252, 208, 45, 1.00);
     }
     .close {
       width: 60px;
+      font-size: 35px;
       line-height: 60px;
       background-color: rgba(243, 244, 246, 1.00);
       cursor: pointer;
@@ -477,7 +478,8 @@ $mainColor: rgba(252, 208, 45, 1.00);
         font-weight: bold;
 
         &:after {
-          content: '▶';
+          content: '\e905';
+          font-family: 'icomoon', Monaco, "微軟正黑體", "Microsoft JhengHei";
           position: absolute;
           right: 0;
           top: 0;
@@ -529,6 +531,9 @@ $mainColor: rgba(252, 208, 45, 1.00);
     width: 100%;
     @media screen and (min-width: 0px) and (max-width: #{$mediaTabletWidth - 1px}) {
       padding: 0 10px;
+      nav {
+        margin-top: 5px;
+      }
     }
     @media screen and (min-width: #{$mediaTabletWidth}) {
       padding-left: 10px;
@@ -649,4 +654,8 @@ $mainColor: rgba(252, 208, 45, 1.00);
       }
     }
   }
+}
+
+#footer {
+  background-color: rgba(30, 31, 32, 1.00);
 }
