@@ -96,7 +96,7 @@ $mainColor: rgba(252, 208, 45, 1.00);
   padding-top: 10px;
   border-bottom: 10px solid $mainColor;
   z-index: 99;
-  
+
   + * {
     margin-top: $mainHeaderHeight;
   }
@@ -111,7 +111,7 @@ $mainColor: rgba(252, 208, 45, 1.00);
       @include clearfix();
       padding-top: 10px;
       padding-right: 10px;
-      
+
       > * {
         display: inline-block;
         float: right;
@@ -154,7 +154,7 @@ $mainColor: rgba(252, 208, 45, 1.00);
           // border-left: 1px solid rgba(32, 33, 33, .30);
           font-weight: bold;
         }
-        
+
         input {
           @include input;
           margin-top: 1px;
@@ -252,7 +252,7 @@ $mainColor: rgba(252, 208, 45, 1.00);
     }
   }
   @media screen and (min-width: $mediaTabletWidth) and (max-width: #{$mainWidth - 1px}) {
-    .container .right .product {      
+    .container .right .product {
       display: none;
     }
     .container .right > div {
@@ -280,7 +280,7 @@ $mainColor: rgba(252, 208, 45, 1.00);
 
     > div {
       @include clearfix();
-      
+
       a {
         float: left;
         display: inline-block;
@@ -505,7 +505,7 @@ $mainColor: rgba(252, 208, 45, 1.00);
 
       &.show {
         height: auto;
-        
+
         > a {
           color: rgba(5, 207, 250, 1.00);
 
@@ -548,7 +548,7 @@ $mainColor: rgba(252, 208, 45, 1.00);
       $height: 35px;
       height: $height;
       @include clearfix();
-      
+
       a {
         float: left;
         display: inline-block;
@@ -557,7 +557,7 @@ $mainColor: rgba(252, 208, 45, 1.00);
         padding: 5px;
         text-decoration: none;
         color: rgba(121, 122, 123, 1.00);
-        
+
         &:last-child, &:hover {
           color: rgba(39, 179, 215, 1.00);
         }
@@ -593,13 +593,20 @@ $mainColor: rgba(252, 208, 45, 1.00);
       padding-bottom: 15px;
       text-align: left;
       font-size: 20px;
+
+      .searchtitle {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        color: black;
+      }
     }
   }
   .items {
     display: inline-block;
     width: 100%;
     @include clearfix();
-    
+
 
     .item {
       float: left;
@@ -667,7 +674,7 @@ $mainColor: rgba(252, 208, 45, 1.00);
       @include clearfix();
       list-style: none;
       padding: 0;
-      
+
       li {
         float: left;
         display: inline-block;
@@ -690,7 +697,7 @@ $mainColor: rgba(252, 208, 45, 1.00);
           color: rgba(255, 255, 255, 1.00);
           @include border-radius(50%);
           @include transition(background-color .3s);
-          
+
 
           &.active, &:hover {
             background-color: rgba(89, 162, 204, 1.00);
@@ -729,11 +736,18 @@ $mainColor: rgba(252, 208, 45, 1.00);
       height: 65px;
       line-height: 65px;
       font-size: 20px;
+
+      .searchtitle {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        color: black;
+      }
     }
     .left {
       padding-right: 35px;
       @include clearfix();
-      
+
       > * {
         float: left;
         display: inline-block;
@@ -839,7 +853,7 @@ $mainColor: rgba(252, 208, 45, 1.00);
   }
   article {
     @include clearfix();
-    
+
     section:nth-child(1) {
       padding: 0 10px;
       header {
@@ -882,7 +896,7 @@ $mainColor: rgba(252, 208, 45, 1.00);
     @media screen and (min-width: #{740px}) {
       @include split-left(360px, '.img', 'section');
     }
-    
+
     .img {
       margin: 0;
       width: 360px;
