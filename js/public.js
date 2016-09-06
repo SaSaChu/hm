@@ -5,7 +5,7 @@
 
 $(function () {
   // 圖自動縮放
-  $('._i').imgLiquid ({verticalAlign: 'center'});
+  // $('._i').imgLiquid ({verticalAlign: 'center'});
 
   $('.banners').each (function () {
     var $that = $(this);
@@ -28,7 +28,7 @@ $(function () {
 
   $menu.find ('.group > a').click (function () {
     var $that = $(this).parent ();
-    
+
     if (!$that.hasClass ('show')) $that.addClass ('show').siblings ().removeClass ('show');
     else $that.removeClass ('show');
   });
