@@ -590,8 +590,11 @@ $mainColor: rgba(252, 208, 45, 1.00);
     }
 
     .img {
-      height: 235px;
+      // height: 235px;
       margin-top: 5px;
+      img {
+        max-width: 100%;
+      }
     }
     .title {
       margin-top: 10px;
