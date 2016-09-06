@@ -317,6 +317,11 @@ $mainColor: rgba(252, 208, 45, 1.00);
         left: calc(#{$i - 1} * 100%);
       }
     }
+    img {
+      @media screen and (min-width: 0px) and (max-width: #{$mainWidth - 1px}) {
+        width: 100%;
+      }
+    }
   }
   @for $i from 1 through 10 {
     &.n#{$i} {
@@ -350,8 +355,11 @@ $mainColor: rgba(252, 208, 45, 1.00);
     height: calc(100% - 60px);
     z-index: 999;
     background-color: rgba(243, 244, 246, 1.00);
-    padding: 20px;
-
+    > div {
+      overflow: auto;
+      height: 100%;
+      padding: 20px;
+    }
     &.show {
       display: inline-block;
     }

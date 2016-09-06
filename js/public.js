@@ -5,15 +5,20 @@
 
 $(function () {
   // 圖自動縮放
-  // $('._i').imgLiquid ({verticalAlign: 'center'});
+  $('._i').imgLiquid ({verticalAlign: 'center'});
 
-  $('.banners').each (function () {
-    var $that = $(this);
-    var $pagination = $that.find ('.pagination > div > a');
+  var $banners = $('.banners').each (function () {
+    var $that = $(this),
+        $banner = $that.find ('.banner'),
+        $pagination = $that.find ('.pagination > div > a'),
+        i = 0;
 
     $pagination.click (function () {
       $(this).addClass ('active').siblings ().removeClass ('active');
       $that.attr ('class', 'banners n' + ($(this).index () + 1));
+      if (i = $banner.eq ($(this).index ()).find ('img').height ()) $that.height (i);
+      else $that.height ($banner.eq ($(this).index ()).find ('img').get (0).width / 4);
+      
     }).first ().click ();
 
     setInterval (function () {
@@ -39,6 +44,13 @@ $(function () {
   $(window).resize (function () {
     if ($(this).width () > 960) $menu.height ($panel.height () + parseFloat ($panel.css ('padding-top')) + parseFloat ($panel.css ('padding-bottom')));
     else $menu.attr ('style');
+    
+    if ($(this).width () < 1200)
+      $banners.each (function () {
+        var $that = $(this), $banner = $that.find ('.banner'), i = 0;
+        if (i = $banner.eq (0).find ('img').height ()) $that.height (i);
+        else $that.height ($banner.eq (0).find ('img').get (0).width / 4);
+      });
   });
   setTimeout (function () { $(window).resize (); });
 });
