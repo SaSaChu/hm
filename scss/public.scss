@@ -648,8 +648,8 @@ $mainColor: rgba(252, 208, 45, 1.00);
         span {
           display: inline-block;
           width: 100%;
-          margin: 5px;
-          padding: 0 5px;
+          margin: 0;
+          padding: 5px 10px;
           font-size: 18px;
           font-weight: bold;
           @include overflow-docx3();
