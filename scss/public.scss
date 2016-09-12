@@ -626,6 +626,7 @@ $mainColor: rgba(252, 208, 45, 1.00);
     .item {
       float: left;
       display: inline-block;
+      height: 321px;
 
       @media screen and (min-width: 0px) and (max-width: #{$mediaTabletWidth - 1px}) {
         width: calc(100% / 2 - 10px * 2);
@@ -648,8 +649,8 @@ $mainColor: rgba(252, 208, 45, 1.00);
         span {
           display: inline-block;
           width: 100%;
-          margin: 0;
-          padding: 5px 10px;
+          margin: 5px;
+          padding: 0 5px;
           font-size: 18px;
           font-weight: bold;
           @include overflow-docx3();
