@@ -42,7 +42,7 @@ $(function () {
   $menu.find ('.close').click (function () { $menu.toggleClass ('show'); });
 
   $(window).resize (function () {
-    if ($(this).width () > 960) $menu.height ($panel.height () + parseFloat ($panel.css ('padding-top')) + parseFloat ($panel.css ('padding-bottom')));
+    if ($(this).width () > 960) $menu.height ($panel.height () + parseFloat ($panel.css ('padding-top')) + parseFloat ($panel.css ('padding-bottom')) + 100);
     else $menu.attr ('style');
     
     if ($(this).width () < 1200)
