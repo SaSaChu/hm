@@ -19,8 +19,6 @@
   @include font-smoothing(antialiased);
 }
 
-
-
 .icon-controller-play:before {
   content: "\e905";
 }
@@ -46,8 +44,6 @@
   content: "\e942";
 }
 
-
-
 * {
   &, &:after, &:before {
     vertical-align: top;
@@ -61,7 +57,6 @@
 $yellow: rgba(251, 213, 70, 1.00) ;
 
 html {
-  height: 100%;
 
   body {
     position: relative;
@@ -69,7 +64,6 @@ html {
     text-align: center;
     margin: 0;
     width: 100%;
-    height: 100%;
     // font-size: medium;
     font-family: "Roboto", "微軟正黑體", Monaco, "Microsoft JhengHei" ;
     background-color: rgba(255, 255, 255, 1.00);
@@ -80,326 +74,889 @@ html {
   }
 }
 
-
-header {
+.container {
+  display: block;
   width: 100%;
+  max-width: $mainWidth;
+  height: 100%;
 
-  .tops {
+  margin: 0 auto;
+}
+$mainHeaderHeight: 85px;
+$mainColor: rgba(252, 208, 45, 1.00);
+
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 100%;
+  height: $mainHeaderHeight;
+  background-color: rgba(32, 33, 33, 1.00);
+  padding-top: 10px;
+  border-bottom: 10px solid $mainColor;
+  z-index: 99;
+
+  + * {
+    margin-top: $mainHeaderHeight;
+  }
+  .container {
+    @include split-left(300px, '.left', '.right');
+
+    > div {
+      // border: 1px solid rgba(255, 0, 0, .3);
+    }
+    // .left {
+
+    // }
+
+    .right {
+      @include clearfix();
+      padding-top: 10px;
+      padding-right: 18px;
+
+      > * {
+        display: inline-block;
+        float: right;
+        width: 150px;
+        // border: 1px solid rgba(255, 0, 0, .3);
+      }
+      > a {
+        margin-top: 6px;
+        color: $mainColor;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 20px;
+
+        // + a {
+          border-left: 2px solid $mainColor;;
+        // }
+
+        &:last-child {
+          border-left: 0;
+        }
+      }
+      > div {
+        position: relative;
+        background-color: $mainColor;
+        height: 40px;
+        width: 350px;
+        padding: 0 15px;
+        color: rgba(32, 33, 33, 1.00);
+        @include border-radius(40px / 2);
+
+        i {
+          position: absolute;
+          right: 10px;
+          top: 10px;
+          display: inline-block;
+          width: 30px;
+          height: 20px;
+          line-height: 20px;
+          cursor: pointer;
+          // border-left: 1px solid rgba(32, 33, 33, .30);
+          font-weight: bold;
+        }
+
+        input {
+          @include input;
+          margin-top: 1px;
+          border-color: $mainColor;
+          background-color: $mainColor;
+          font-size: 20px;
+          width: 100%;
+          padding-right: 20px;
+          font-weight: bold;
+
+          @include input-placeholder {
+            color: rgba(32, 33, 33, 1.00);
+            font-weight: bold;
+          }
+
+          &:focus {
+            border: 0;
+            @include box-shadow(none);
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 0px) and (max-width: #{$mediaTabletWidth - 1px}) {
+    .container {
+      .left {
+        text-align: left;
+        width: 60px;
+
+        > a {
+          margin-top: 6px;
+          color: $mainColor;
+          text-decoration: none;
+          font-size: 55px;
+          cursor: pointer;
+        }
+        :not(#menu_button) {
+          display: none;
+        }
+      }
+      .right {
+        width: calc(100% - 60px);
+
+        > div {
+          width: 250px;
+          @include border-radius(10px);
+        }
+        .product {
+          display: none;
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 0px) and (max-width: #{640px - 1px}) {
+    .container {
+      .left {
+        margin-top: 5px;
+        width: 45px;
+
+        > a {
+          font-size: 45px;
+        }
+      }
+      .right {
+        width: calc(100% - 45px);
+        > a {
+          font-size: 13px;
+          width: 70px;
+          margin-top: 10px;
+        }
+        > div {
+          padding-left: 5px;
+          width: 125px;
+          height: 35px;
+          @include border-radius(10px);
+
+          input {
+            margin-top: 2px;
+            font-size: 13px;
+            padding-right: 5px;
+          }
+          i {
+            top: 8px;
+            right: 5px;
+            width: 20px;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (min-width: #{$mediaTabletWidth}) {
+    .container .left > #menu_button {
+      display: none;
+    }
+  }
+  @media screen and (min-width: $mediaTabletWidth) and (max-width: #{$mainWidth - 1px}) {
+    .container .right .product {
+      display: none;
+    }
+    .container .right > div {
+      width: 300px;
+    }
+  }
+}
+
+.banners {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 345px;
+  background-color: rgba(32, 33, 33, 1.00);
+  overflow: hidden;
+
+  .pagination {
+    position: absolute;
+    bottom: 10px;
+    right: calc(50% - #{$mainWidth} / 2 + 10px);
+    @media screen and (min-width: 0px) and (max-width: #{$mainWidth - 1px}) {
+      right: 10px;
+    }
+    display: inline-block;
+    z-index: 2;
+
+    > div {
+      @include clearfix();
+
+      a {
+        float: left;
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin: 5px;
+        cursor: pointer;
+        background-color: rgba(208, 208, 208, 1.00);
+        @include border-radius(50%);
+        @include transition(background-color .3s);
+
+        &.active {
+          background-color: $mainColor;
+        }
+        &:hover {
+          background-color: rgba(228, 228, 228, 1.00);
+        }
+      }
+    }
+  }
+  .banner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: inline-block;
     width: 100%;
-    height: 95px;
-    background-color: rgba(33, 33, 33, 1.00);
-    border-bottom: 5px solid $yellow;
+    height: 100%;
+    z-index: 1;
+    @include transition(left .3s);
 
-    .topboxs {
-      width: 1000px;
-      margin: 0 auto;
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}) {
+        left: calc(#{$i - 1} * 100%);
+      }
+    }
+    img {
+      @media screen and (min-width: 0px) and (max-width: #{$mainWidth - 1px}) {
+        width: 100%;
+      }
+    }
+  }
+  @for $i from 1 through 10 {
+    &.n#{$i} {
+      @for $j from 1 through 10 {
+        .banner:nth-child(#{$j}) {
+          left: calc(#{$j - $i} * 100%);
+        }
+      }
+    }
+  }
+}
 
-      @include split-left(30%, '.top_l', '.top_r');
+.main {
+  .container {
+    @media screen and (min-width: #{$mediaTabletWidth}) {
+      @include split-left(292px, '#menu', '#panel');
+    }
+    > * {
+    }
+  }
+}
 
-      .top_l {
-        padding-top: 15px;
-        height: 57px;
+#menu {
+  $height: 45px;
+  @media screen and (min-width: 0px) and (max-width: #{$mediaTabletWidth - 1px}) {
+    position: fixed;
+    left: 0;
+    top: 60px;
+    display: none;
+    width: 100%;
+    height: calc(100% - 60px);
+    z-index: 999;
+    background-color: rgba(243, 244, 246, 1.00);
+    > div {
+      overflow: auto;
+      height: 100%;
+      padding: 20px;
+    }
+    &.show {
+      display: inline-block;
+    }
+
+    &:before, .close {
+      position: absolute;
+      top: -60px;
+      left: 0;
+      display: inline-block;
+      height: 60px;
+    }
+    .close {
+      width: 60px;
+      font-size: 35px;
+      line-height: 60px;
+      background-color: rgba(243, 244, 246, 1.00);
+      cursor: pointer;
+      z-index: 2;
+    }
+    &:before {
+      content: '';
+      width: 100%;
+      background-color: rgba(39, 40, 34, .500);
+      z-index: 1;
+    }
+    @include clearfix();
+
+    .title {
+      float: left;
+      display: inline-block;
+      width: 100%;
+      height: $height;
+      line-height: $height;
+      text-align: left;
+      font-size: 25px;
+      color: rgba(39, 179, 215, 1.00);
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .groups {
+      + .title {
+        margin-top: 20px;
+      }
+    }
+    .group {
+      float: left;
+      display: inline-block;
+      width: calc(100% / 2 - 30px / 2);
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(212, 215, 215, 1.00);
+
+      &:nth-child(2n) {
+        margin-left: 30px;
+      }
+      &:nth-child(n + 3) {
+        margin-top: 10px;
+      }
+      a {
+        display: inline-block;
+        width: 100%;
+        color: rgba(113, 114, 115, 1.00);
+        text-align: left;
+        font-size: 20px;
+        text-decoration: none;
+        @include overflow-docx3();
+      }
+      > a {
+        font-weight: bold;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(212, 215, 215, 1.00);
+      }
+      > div {
+        padding: 0 20px;
+        padding-top: 10px;
 
         a {
-          border: 0;
-          img {
-            max-width: 100%;
-            height: auto;
-          }
+          margin-top: 5px;
+          font-size: 18px;
         }
+      }
+    }
+  }
+  @media screen and (min-width: #{$mediaTabletWidth}) {
+    border: 1px solid rgba(238, 239, 240, 1.00);
+    background-color: rgba(243, 244, 246, 1.00);
+    text-align: left;
 
+    .title, a {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      height: $height;
+      line-height: $height;
+      padding-left: 5px;
+      padding-right: 5px;
+      text-decoration: none;
+      color: rgba(132, 133, 134, 1.00);
+      cursor: pointer;
+      @include overflow-docx3();
+      @include transition(color .3s);
+
+      &:hover {
+        color: rgba(5, 207, 250, 1.00);
+      }
+      &.active {
+        color: rgba(5, 207, 250, 1.00);
+      }
+    }
+    .title {
+      font-weight: bold;
+      color: rgba(39, 179, 215, 1.00);
+      border-bottom: 1px solid rgba(252, 253, 253, 1.00);
+    }
+    .close {
+      display: none;
+    }
+    .group {
+      display: inline-block;
+      width: 100%;
+      height: $height;
+      line-height: $height;
+
+      > a {
+        padding-right: $height + 5px;
+        font-weight: bold;
+
+        &:after {
+          content: '\e905';
+          font-family: 'icomoon', Monaco, "微軟正黑體", "Microsoft JhengHei";
+          position: absolute;
+          right: 0;
+          top: 0;
+          display: inline-block;
+          text-align: center;
+          width: $height;
+          height: $height;
+          line-height: $height;
+          font-size: 18px;
+          @include rotate(0);
+          @include transition(transform .3s);
+        }
+      }
+      > div {
+        display: none;
+        background-color: rgba(254, 255, 255, 1.00);
+        width: calc(100% - 10px * 2);
+        margin: 0 10px;
+        border-bottom: 1px solid rgba(209, 210, 211, 1.00);
+        @include border-radius(3px);
+        // @include box-shadow(0 1px 1px rgba(209, 210, 211, 1.00));
       }
 
-      .top_r {
+      &.show {
+        height: auto;
+
+        > a {
+          color: rgba(5, 207, 250, 1.00);
+
+          &:after {
+            @include rotate(90deg);
+          }
+        }
+        > div {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+#panel {
+  @media screen and (min-width: #{$mediaTabletWidth}) {
+    padding: 10px;
+  }
+
+  .infos {
+    display: inline-block;
+    width: 100%;
+    @media screen and (min-width: 0px) and (max-width: #{$mediaTabletWidth - 1px}) {
+      padding: 0 10px;
+      nav {
+        margin-top: 5px;
+      }
+    }
+    @media screen and (min-width: #{$mediaTabletWidth}) {
+      padding-left: 10px;
+    }
+    margin-bottom: 5px;
+
+    > * {
+      display: inline-block;
+      width: 100%;
+    }
+    nav {
+      $height: 35px;
+      height: $height;
+      @include clearfix();
+
+      a {
+        float: left;
         display: inline-block;
-        padding-top: 30px;
-        height: 75px;
+        height: $height;
+        line-height: $height - 10px;
+        padding: 5px;
+        text-decoration: none;
+        color: rgba(121, 122, 123, 1.00);
 
-        @include clearfix();
-
-        .menu {
-          display: inline-block;
-          float: right;
-          margin: 0;
-          padding: 0;
-          color: $yellow;
-          line-height: 35px;
-
-          a {
-            text-decoration: none;
-            color: $yellow;
-            font-size: 1em;
-            font-weight: bolder;
-
-            &:hover {
-              text-decoration: underline;
-              color: white;
-            }
-          }
-
-          &:after {
-            content: '│';
-            padding: 0 15px;
-          }
-
-          &:nth-child(2) {
-            &:after {
-              content: '';
-            }
-          }
+        &:last-child, &:hover {
+          color: rgba(39, 179, 215, 1.00);
         }
+        + a {
+          position: relative;
+          margin-left: 20px;
 
-        .inputboxs {
-          display: inline-block;
-          float: right;
-          background-color: $yellow;
-          padding: 5px 15px;
-          @include border-radius(20px);
-
-          #inputype {
-            width: 200px;
-            border: 0;
-            outline: 0;
-            font-size: 1em;
-            color: black;
-            background: transparent;
-          }
-
-          button {
-            background: transparent;
-            border: 0;
-            outline: 0;
-            color: black;
-            cursor: pointer;
-            font-size: 1em;
-
-            &:hover {
-              color: rgba(0, 210, 250, 1.00);
-            }
+          &:before {
+            content: '>';
+            position: absolute;
+            left: -20px;
+            top: 0;
+            display: inline-block;
+            width: 20px;
+            height: $height;
+            line-height: $height;
+            color: rgba(121, 122, 123, 1.00);
           }
         }
       }
     }
-  }
 
-  .banners {
-    width: 100%;
-    height: 345px;
-  }
-
-}
-
-
-.middle {
-  width: 100%;
-
-  border: 1px solid rgba(255, 0, 0, .3);
-
-  .middleboxs {
-    width: 1000px;
-    margin: 0 auto;
-
-    @include split-left(30%, '.middle_l', '.middle_r');
-
-    .middle_l {
-      height: 500px;
-      background-color: rgba(0, 128, 0, 0.2);
+    .img {
+      // height: 235px;
+      margin-top: 5px;
+      img {
+        max-width: 100%;
+      }
     }
+    .title {
+      margin-top: 10px;
+      border-top: 1px solid rgba(203, 204, 205, 1.00);
+      border-bottom: 1px solid rgba(203, 204, 205, 1.00);
+      color: rgba(39, 179, 215, 1.00);
+      padding-top: 13px;
+      padding-bottom: 15px;
+      text-align: left;
+      font-size: 20px;
 
-    .middle_r {
-      padding: 15px 0 15px 15px;
-
-      @include clearfix();
-
-      > div {
-        float: left;
-        width: calc(100% / 3 - 21px / 3);
-        height: 285px;
-        margin-bottom: 20px;
-
-        &:nth-child(3n + 2) {
-          margin: 0 10px;
-        }
-
-        .product_pic {}
-
-        .product_boxs {
-          .p_name {}
-          .p_type {}
-        }
-
-        .product_btn {}
-
+      .searchtitle {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        color: black;
       }
     }
   }
-}
-
-
-
-
-
-footer {
-  width: 100%;
-
-  .ftops {
+  .items {
+    display: inline-block;
     width: 100%;
-    padding: 25px 0;
-    background-color: rgba(34, 34, 34, 1.00);
+    @include clearfix();
 
-    .fboxs {
-      width: 1000px;
-      margin: 0 auto;
 
-      @include clearfix();
+    .item {
+      float: left;
+      display: inline-block;
+      height: 321px;
 
-      > div {
-        float: left;
-        width: 50%;
+      @media screen and (min-width: 0px) and (max-width: #{$mediaTabletWidth - 1px}) {
+        width: calc(100% / 2 - 10px * 2);
+      }
+      @media screen and (min-width: #{$mediaTabletWidth}) {
+        width: calc(100% / 3 - 10px * 2);
+      }
 
-        @include clearfix();
-        // 左邊的設定
-        .ftitle, .ftype {
-          margin: 0;
-          padding: 0;
-        }
+      margin: 10px;
 
-        .ftitle {
-          font-size: 1em;
-          text-align: left;
-          font-weight: bolder;
-          padding-bottom: 15px;
-          color: $yellow;
-        }
+      .img {
+        height: 200px;
+        border: 1px solid rgba(232, 233, 234, 1.00);
+      }
+      .info {
+        text-align: left;
+        margin: 10px 0;
+        border-left: 1px solid rgba(39, 180, 215, 1.00);
 
-        .ftype {
-          display: inline-block;
-          float: left;
-          font-size: .9em;
-          text-align: left;
-          color: white;
-          padding: 7px 0;
-
-          a {
-            color: white;
-            cursor: pointer;
-            text-decoration: none;
-
-            &:hover {
-              text-decoration: underline;
-              color: rgba(251, 213, 70, 1.00);
-            }
-          }
-
-          &:after {
-            content: '│';
-            padding: 0 5px;
-          }
-
-          &:last-child {
-              &:after {
-              content: '';
-            }
-          }
-        }
-
-        &:first-child {
-          padding-right: 30px;
-        }
-
-        // 右邊的設定
-        div {
+        span {
           display: inline-block;
           width: 100%;
+          margin: 5px;
+          padding: 0 5px;
+          font-size: 18px;
+          font-weight: bold;
+          @include overflow-docx3();
 
-          @include clearfix();
-
-          .icontype {
-            margin: 0;
-            padding-bottom: 15px;
-            display: inline-block;
-            float: left;
-            color: white;
-            font-size: .9em;
-
-            &:before {
-              padding-right: 5px;
-              color: $yellow;
-            }
-
-            &:nth-child(2) {
-              text-align: left;
-              padding-left: 19px;
-            }
-
-            &:nth-child(3) {
-              text-align: left;
-              padding-right: 20px;
-            }
-
-
-            a {
-              font-size: 1em;
-              color: white;
-              text-decoration: none;
-              cursor: pointer;
-              padding-left: 5px;
-
-              &:hover {
-                text-decoration: underline;
-                color: $yellow;
-              }
-            }
-
+          + span {
+            margin-top: 0;
           }
-
-          .idtitle {
-            display: inline-block;
-            float: left;
-            width: 50%;
-            text-align: left;
-            font-size: 1em;
-            color: $yellow;
-
-            a {
-              font-size: 1em;
-              color: white;
-              text-decoration: none;
-              cursor: pointer;
-              padding-left: 5px;
-
-              &:hover {
-                text-decoration: underline;
-                color: $yellow;
-              }
-            }
-          }
-
         }
+      }
+      a {
+        display: inline-block;
+        width: 100%;
+        padding: 10px 5px;
+        background-color: rgba(203, 204, 205, 1.00);
+        color: rgba(255, 255, 255, 1.00);
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 20px;
+        @include transition(background-color .3s);
 
-
-
-
-
+        &:hover {
+          background-color: rgba(39, 180, 215, 1.00);
+        }
       }
     }
-
   }
-
-  .fdowns {
+  .pagination {
+    display: inline-block;
     width: 100%;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(203, 204, 205, 1.00);
 
-    p {
+    ul {
       display: inline-block;
-      padding: 15px 0;
-      margin: 0;
-      color: rgba(34, 34, 34, 1.00);
-      font-style: .8em;
+      margin: 0 auto;
+      @include clearfix();
+      list-style: none;
+      padding: 0;
+
+      li {
+        float: left;
+        display: inline-block;
+
+        &.active, &:hover {
+          a {
+            background-color: rgba(89, 162, 204, 1.00);
+          }
+        }
+        a {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          line-height: 30px;
+          margin: 5px;
+          font-size: 18px;
+          text-decoration: none;
+          background-color: rgba(196, 208, 217, 1.00);
+          // border: 1px solid rgba(255, 0, 0, .3);
+          color: rgba(255, 255, 255, 1.00);
+          @include border-radius(50%);
+          @include transition(background-color .3s);
+
+
+          &.active, &:hover {
+            background-color: rgba(89, 162, 204, 1.00);
+          }
+        }
+      }
     }
   }
 }
 
+#footer {
+  background-color: rgba(30, 31, 32, 1.00);
+  padding-bottom: 25px;
 
+  .container {
+    @include split-right(50%, '.left', '.right');
+    text-align: left;
+    @media screen and (min-width: 0) and (max-width: #{$mediaTabletWidth - 1px}) {
+      padding: 0 10px;
+      > * {
+        width: 100% !important;
+        padding: 0 !important;
+      }
+    }
+    @media screen and (min-width: $mediaTabletWidth) and (max-width: #{$mainWidth - 1px}) {
+      padding: 0 10px;
+    }
 
+    > * {
+      // border: 1px solid rgba(255, 0, 0, .3);
+    }
+    .title {
+      color: rgba(252, 208, 45, 1.00);
+      font-weight: bold;
+      margin: 0;
+      height: 65px;
+      line-height: 65px;
+      font-size: 20px;
 
+      .searchtitle {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        color: black;
+      }
+    }
+    .left {
+      padding-right: 35px;
+      @include clearfix();
 
+      > * {
+        float: left;
+        display: inline-block;
+      }
+      .title {
+        width: 100%;
+      }
+      a {
+        position: relative;
+        color: rgba(255, 255, 255, 1.00);
+        text-decoration: none;
+        font-size: 16px;
+        padding: 5px 10px;
+        @include transition(color .3s);
+
+        &:hover {
+          color: rgba(252, 208, 45, 1.00);
+        }
+        &:after {
+          content: '';
+          position: absolute;
+          right: 0;
+          top: 7px;
+          display: inline-block;
+          width: 1px;
+          height: calc(100% - 7px * 2);
+          background-color: rgba(255, 255, 255, 1.00);
+        }
+
+      }
+    }
+    .right {
+      padding-left: 35px;
+      > div {
+        @include clearfix();
+        + div {
+          margin-top: 20px;
+
+          p {
+            color: rgba(252, 208, 45, 1.00);
+            font-weight: bold;
+            font-size: 18px;
+            width: 50%;
+            padding-left: 0;
+
+            a {
+              color: rgba(255, 255, 255, 1.00);
+              text-decoration: none;
+              margin-left: 5px;
+            }
+          }
+        }
+        p {
+          float: left;
+          display: inline-block;
+          width: 100%;
+          position: relative;
+          color: rgba(255, 255, 255, 1.00);
+          padding-left: 25px;
+          margin: 5px 0;
+
+          &:before {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: inline-block;
+            width: 20px;
+            text-align: center;
+            color: rgba(252, 208, 45, 1.00);
+          }
+        }
+        .icon-phone, .icon-printer {
+          width: auto;
+          margin-right: 15px;
+          max-width: calc(45% - 15px);
+          margin-top: 15px;
+        }
+        .icon-mail-envelope-closed {
+          margin-top: 15px;
+          a {
+            color: rgba(255, 255, 255, 1.00);
+            text-decoration: none;
+          }
+        }
+      }
+
+    }
+  }
+}
+
+#about {
+  padding: 10px;
+  text-align: left;
+  @media screen and (min-width: 0) and (max-width: #{670px - 1px}) {
+  }
+  @media screen and (min-width: #{670px}) {
+    article {
+      > * {
+        display: inline-block;
+        float: left;
+        width: 50%;
+      }
+    }
+  }
+  article {
+    @include clearfix();
+
+    section:nth-child(1) {
+      padding: 0 10px;
+      header {
+        display: inline-block;
+        font-weight: bold;
+      }
+    }
+    section:nth-child(2) {
+      background-color: rgba(34, 170, 208, 1.00);
+      color: rgba(255, 255, 255, 1.00);
+      padding: 10px;
+      div {
+        display: inline-block;
+        width: 100%;
+        margin-top: 3px;
+        + div {
+          margin-top: 10px;
+        }
+        span {
+          color: rgba(252, 208, 45, 1.00);
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  iframe {
+    width: 100%;
+    height: 450px;
+    margin-top: 20px;
+  }
+}
+
+#detailed {
+  padding: 10px;
+  article {
+    text-align: left;
+  }
+  article:nth-child(1) {
+    margin-bottom: 20px;
+    @media screen and (min-width: #{740px}) {
+      @include split-left(360px, '.img', 'section');
+    }
+
+    .img {
+      margin: 0;
+      width: 360px;
+      height: 360px;
+      border: 1px solid rgba(203, 204, 205, .500);
+      @media screen and (min-width: 0) and (max-width: #{740px - 1px}) {
+        margin: 0 auto;
+        max-width: calc(100% - 10px * 2);
+      }
+    }
+    section {
+      @media screen and (min-width: 0) and (max-width: #{740px - 1px}) {
+        width: 100%;
+        padding: 10px;
+      }
+      @media screen and (min-width: #{740px}) {
+        padding-left: 20px;
+      }
+      width: calc(100% - 360px);
+
+      div {
+        background-color: rgba(33, 164, 207, 1.00);
+        padding: 15px;
+        margin-bottom: 15px;
+
+        span {
+          display: inline-block;
+          width: 100%;
+          color: rgba(255, 255, 255, 1.00);
+        }
+      }
+      header {
+        border-bottom: 1px solid rgba(143, 173, 183, 1.00);
+        padding-bottom: 15px;
+        font-weight: bold;
+      }
+    }
+  }
+  article:nth-child(2) {
+    border: 1px solid rgba(223, 224, 224, 1.00);
+    border-left: 0;
+    border-right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
