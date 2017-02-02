@@ -38,14 +38,25 @@ $(function () {
     else $that.removeClass ('show');
   });
 
-  $('#menu_button').click (function () { $menu.toggleClass ('show'); });
+  $('#menu_button').click (function () {
+    $menu.toggleClass ('show');
+    if ($(window).width () <= 960) {
+      var max = Math.max.apply (null, $menu.find ('.group').map (function () {
+        return parseInt ($(this).height (), 10);
+      }).toArray ());
+      $menu.find ('.group').css ({'height': max + 30 + 'px'});
+    }
+
+  });
   $menu.find ('.close').click (function () { $menu.toggleClass ('show'); });
 
   $(window).resize (function () {
     if ($(this).width () > 960) {
-      if ($menu.height () < $panel.height () + parseFloat ($panel.css ('padding-top')) + parseFloat ($panel.css ('padding-bottom')))
-        $menu.height ($panel.height () + parseFloat ($panel.css ('padding-top')) + parseFloat ($panel.css ('padding-bottom')));
-    } else $menu.attr ('style');
+      if ($menu.height () <= $panel.height () + parseFloat ($panel.css ('padding-top')) + parseFloat ($panel.css ('padding-bottom')))
+        $menu.height ($panel.height () + parseFloat ($panel.css ('padding-top')) + parseFloat ($panel.css ('padding-bottom')) + 50);
+    } else {
+      $menu.attr ('style');
+    }
     
     if ($(this).width () < 1200)
       $banners.each (function () {
